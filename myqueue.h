@@ -33,9 +33,13 @@ typedef struct queue queue_t;
  */
 queue_t *create_queue(unsigned int _capacity)
 {
-    queue_t *myQueue = (myQueue*)malloc(sizeof(myQueue));
+    queue_t *myQueue = (queue_t *)malloc(sizeof(queue_t));
     if (myQueue == NULL){return NULL;}
     myQueue->capacity = _capacity;
+    myQueue->size = 0;
+    myQueue->back = 0;
+    myQueue->front = 0;
+    myQueue ->data = (int *)malloc(sizeof(int)*_capacity);
 
     return myQueue;
 }
@@ -46,9 +50,10 @@ queue_t *create_queue(unsigned int _capacity)
  **/
 int queue_empty(queue_t *q)
 {
-    // TODO: Implement me!
-
-    return NULL;
+    if (q->size = 0){
+        return 1;
+    }
+    return 0;
 }
 
 /** Check if the queue is Full
@@ -57,9 +62,10 @@ int queue_empty(queue_t *q)
  **/
 int queue_full(queue_t *q)
 {
-    // TODO: Implement me!
-
-    return NULL;
+    if (q->size == q->capacity){
+        return 1;
+    }
+    return 0;
 }
 
 /** Enqueue a new item
@@ -70,7 +76,7 @@ int queue_enqueue(queue_t *q, int item)
 {
     // TODO: Implement me!
 
-    return NULL;
+    return 0;
 }
 
 /** Dequeue an item
@@ -106,7 +112,9 @@ unsigned int queue_size(queue_t *q)
  **/
 void free_queue(queue_t *q)
 {
-    // TODO: Implement me!
+    free(q->data);
+    free(q);
+    return;
 }
 
 #endif
