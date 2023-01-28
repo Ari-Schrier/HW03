@@ -1,8 +1,8 @@
 
 /*  ========== H03 - Personal Queue Implementation ============
  *
- *   Student: UPDATE
- *   Semester: UPDATE
+ *   Student: Aidan Schrier
+ *   Semester: Spring 2023
  *
  * A simple queue implementation to hold int values.
  *
@@ -33,8 +33,9 @@ typedef struct queue queue_t;
  */
 queue_t *create_queue(unsigned int _capacity)
 {
-    queue_t *myQueue = NULL;
-    // TODO: Implement me!
+    queue_t *myQueue = (myQueue*)malloc(sizeof(myQueue));
+    if (myQueue == NULL){return NULL;}
+    myQueue->capacity = _capacity;
 
     return myQueue;
 }
