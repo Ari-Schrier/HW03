@@ -42,11 +42,9 @@ int unitTest1(int status)
 }
 
 // Tests adding multiple items to a queue
-/**
 int unitTest2(int status)
 {
     int passed = 0;
-
     queue_t *testq = create_queue(10);
     queue_enqueue(testq, 1);
     queue_enqueue(testq, 2);
@@ -158,14 +156,14 @@ int unitTest5(int status)
 
     return passed;
 }
-*/
+
 // TODO: Add more tests here
 // add your own, and uncomment the provided tests as 
 // things are implemented
 int (*unitTests[])(int) = {
     unitTest1,
-    // unitTest2,
-    // unitTest3,
+    unitTest2,
+    unitTest3,
     // unitTest4,
     // unitTest5,
     NULL};
@@ -179,7 +177,7 @@ int main()
     int counter = 0;
     while (unitTests[counter] != NULL)
     {
-        printf("========unitTest %d========\n", counter);
+        printf("========unitTest %d========\n", counter + 1);
         if (1 == unitTests[counter](1))
         {
             printf("passed test\n");

@@ -7,6 +7,8 @@
  * A simple queue implementation to hold int values.
  *
  */
+#include <stdio.h> //Get rid of this when you remove the print statements
+
 #ifndef MYQUEUE_H
 #define MYQUEUE_H
 
@@ -39,8 +41,7 @@ queue_t *create_queue(unsigned int _capacity)
     myQueue->size = 0;
     myQueue->back = 0;
     myQueue->front = 0;
-    myQueue ->data = (int *)malloc(sizeof(int)*_capacity);
-
+    myQueue ->data = (int *)malloc(sizeof(int)*);
     return myQueue;
 }
 
@@ -74,8 +75,15 @@ int queue_full(queue_t *q)
  **/
 int queue_enqueue(queue_t *q, int item)
 {
-    // TODO: Implement me!
-
+    if ((q == NULL)||(queue_full(q))){
+        return -1;
+    }
+    
+    q->data[q->back] = item;
+    q->back ++;
+    if (q->size < q->capacity){
+        q->size ++;}
+    
     return 0;
 }
 
@@ -90,9 +98,17 @@ int queue_enqueue(queue_t *q, int item)
  */
 int queue_dequeue(queue_t *q)
 {
-    // TODO: Implement me!
+    if(q != NULL){
+        if(queue_empty(q)){
+            fputs("Nothing to dequeue\n", stderr);
+            return EXIT_FAILURE;
+        }
+    }
+    int popped_data = q->data[q->front];
+    q->front ++;
+    q->size --;
 
-    return NULL; // Note: This line is a filler so the code compiles.
+    return  popped_data;
 }
 
 /** Queries the current size of a queue
@@ -101,9 +117,7 @@ int queue_dequeue(queue_t *q)
  **/
 unsigned int queue_size(queue_t *q)
 {
-    // TODO: Implement me!
-
-    return NULL;
+    return q->size;
 }
 
 /** Removes a queue and all of its elements from memory.
@@ -112,8 +126,12 @@ unsigned int queue_size(queue_t *q)
  **/
 void free_queue(queue_t *q)
 {
-    free(q->data);
-    free(q);
+    if(q != NULL){
+        if(q->data != NULL){
+            free(q->data);
+        }
+        free(q);
+    }
     return;
 }
 
