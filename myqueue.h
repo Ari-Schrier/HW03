@@ -115,12 +115,13 @@ int queue_dequeue(queue_t *q)
             fputs("Nothing to dequeue\n", stderr);
             return EXIT_FAILURE;
         }
+        int popped_data = q->data[q->front];
+        q->front = advance_pointer(q, q->front);
+        q->size --;
+        return  popped_data;
     }
-    int popped_data = q->data[q->front];
-    q->front = advance_pointer(q, q->front);
-    q->size --;
 
-    return  popped_data;
+    return  -1;
 }
 
 /** Queries the current size of a queue
