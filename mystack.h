@@ -45,17 +45,16 @@ typedef struct stack
 */
 stack_t *create_stack(unsigned int capacity)
 {
-    stack_t *myStack = (stack *)malloc(sizeof(stack_t));
+    stack_t *myStack = (stack_t *)malloc(sizeof(stack_t));
     if (myStack == NULL){
         return NULL;
     }
-    mystack->count = 0;
+    myStack->count = 0;
     myStack->capacity = capacity;
     myStack->head = NULL;
 
     return myStack;
 }
-
 
 /** Check if the stack is empty
 * Returns 1 if true (The stack is completely empty)
@@ -63,8 +62,8 @@ stack_t *create_stack(unsigned int capacity)
 */
 int stack_empty(stack_t *s)
 {
-    if (s->count = 0){
-        return 1
+    if (s->count == 0){
+        return 1;
     }
 
     return 0;
@@ -76,8 +75,8 @@ int stack_empty(stack_t *s)
 **/
 int stack_full(stack_t *s)
 {
-    if(s->count = s->capacity){
-        return 1
+    if(s->count == s->capacity){
+        return 1;
     }
 
     return 0;
@@ -90,9 +89,14 @@ int stack_full(stack_t *s)
 **/
 int stack_enqueue(stack_t *s, int item)
 {
-    // TODO: Implement me!
-
-    return NULL; 
+    if (s->count == s->capacity){return -1;}
+    node_t *newNode = (node_t *)malloc(sizeof(node_t));
+    if(newNode == NULL){return -1;}
+    newNode->data = item;
+    newNode->next = s->head;
+    s->head = newNode;
+    s->count ++;
+    return  0; 
 }
 
 /** Dequeue an item
@@ -106,9 +110,17 @@ int stack_enqueue(stack_t *s, int item)
 **/
 int stack_dequeue(stack_t *s)
 {
-    // TODO: Implement me!
+    if (s->count == 0) {
+        fputs("No items to dequeue/n", stderr);
+        return EXIT_FAILURE;
+    }
+    int plucked_data = s->head->data;
+    node_t* new_head = s->head->next;
+    free(s->head);
+    s->head = new_head;
+    s->count --;
 
-    return NULL; 
+    return plucked_data; 
 }
 
 
@@ -118,11 +130,20 @@ int stack_dequeue(stack_t *s)
 */
 unsigned int stack_size(stack_t *s)
 {
-    // TODO: Implement me!
-
-    return NULL;
+    return s->count;
 }
 
+/** 
+Frees all items in a list, starting from the head.
+*/
+void free_list(node_t* activeNode){
+    node_t* nextNode;
+    while (activeNode != NULL){
+        nextNode = activeNode->next;
+        free(activeNode);
+        activeNode = nextNode;
+    }
+}
 
 /** Removes a stack and ALL of its elements from memory.
  *  This should be called before any program terminates.
@@ -130,7 +151,10 @@ unsigned int stack_size(stack_t *s)
  **/
 void free_stack(stack_t *s)
 {
-    // TODO: Implement me!
+    if (s != NULL){
+        free_list(s->head);
+        free(s);
+    }
 }
 
 #endif

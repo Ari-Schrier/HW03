@@ -164,8 +164,8 @@ int (*unitTests[])(int) = {
     unitTest1,
     unitTest2,
     unitTest3,
-    // unitTest4,
-    // unitTest5,
+    unitTest4,
+    unitTest5,
     NULL};
 // ====================================================
 // ================== Program Entry ===================

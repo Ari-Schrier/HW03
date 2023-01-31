@@ -1,7 +1,7 @@
 /*  ========== H03 - Personal Queue Implementation ============
  *
- *   Student: UPDATE
- *   Semester: UPDATE
+ *   Student: Aidan Schrier
+ *   Semester: Spring 2023
  *
  * A simple queue unit-tst implementation
  *
@@ -156,11 +156,11 @@ int unitTest5(int status)
 // add your own, and uncomment the provided tests as
 // things are implemented
 int (*unitTests[])(int) = {
-//    unitTest1,
-//    unitTest2,
-//    unitTest3,
-//    unitTest4,
-//    unitTest5,
+    unitTest1,
+    unitTest2,
+    unitTest3,
+    unitTest4,
+    unitTest5,
     NULL};
 
 // ====================================================

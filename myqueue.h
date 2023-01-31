@@ -33,16 +33,28 @@ typedef struct queue queue_t;
  * Returns a pointer to a newly created queue.
  * data should be stored on the heap (malloc)
  */
-queue_t *create_queue(unsigned int _capacity)
+queue_t *create_queue(unsigned int capacity)
 {
     queue_t *myQueue = (queue_t *)malloc(sizeof(queue_t));
     if (myQueue == NULL){return NULL;}
-    myQueue->capacity = _capacity;
+    myQueue->capacity = capacity;
     myQueue->size = 0;
     myQueue->back = 0;
     myQueue->front = 0;
-    myQueue ->data = (int *)malloc(sizeof(int)*);
+    myQueue ->data = (int *)malloc(capacity * sizeof(int));
+    if (myQueue->data == NULL){
+        free(myQueue);
+        return NULL;}
     return myQueue;
+}
+
+unsigned int advance_pointer(queue_t *q, unsigned int arrow){
+    if(arrow == q->capacity){
+        arrow = 0;
+    }else{
+        arrow ++;
+    }
+    return arrow;
 }
 
 /** Check if the queue is empty
@@ -51,7 +63,7 @@ queue_t *create_queue(unsigned int _capacity)
  **/
 int queue_empty(queue_t *q)
 {
-    if (q->size = 0){
+    if (q->size == 0){
         return 1;
     }
     return 0;
@@ -80,7 +92,7 @@ int queue_enqueue(queue_t *q, int item)
     }
     
     q->data[q->back] = item;
-    q->back ++;
+    q->back = advance_pointer(q, q->back);
     if (q->size < q->capacity){
         q->size ++;}
     
@@ -105,7 +117,7 @@ int queue_dequeue(queue_t *q)
         }
     }
     int popped_data = q->data[q->front];
-    q->front ++;
+    q->front = advance_pointer(q, q->front);
     q->size --;
 
     return  popped_data;
