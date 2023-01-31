@@ -1,7 +1,7 @@
 /*  ========== H03 - Personal Stack Implementation ============
  *
- *   Student: UPDATE
- *   Semester: UPDATE
+ *   Student: Aidan Schrier
+ *   Semester: Spring 2023
  *
  * A simple stack implementation to hold int values.
  *
@@ -45,9 +45,13 @@ typedef struct stack
 */
 stack_t *create_stack(unsigned int capacity)
 {
-    // Modify the body of this function as needed.
-    stack_t *myStack = NULL;
-    // TODO: Implement me!!
+    stack_t *myStack = (stack *)malloc(sizeof(stack_t));
+    if (myStack == NULL){
+        return NULL;
+    }
+    mystack->count = 0;
+    myStack->capacity = capacity;
+    myStack->head = NULL;
 
     return myStack;
 }
@@ -59,9 +63,11 @@ stack_t *create_stack(unsigned int capacity)
 */
 int stack_empty(stack_t *s)
 {
-    // TODO: Implement me!!
+    if (s->count = 0){
+        return 1
+    }
 
-    return NULL;
+    return 0;
 }
 
 /** Check if the stack is full
@@ -70,9 +76,11 @@ int stack_empty(stack_t *s)
 **/
 int stack_full(stack_t *s)
 {
-    // TODO: Implement me!
+    if(s->count = s->capacity){
+        return 1
+    }
 
-    return NULL;
+    return 0;
 }
 
 /** Enqueue a new item
