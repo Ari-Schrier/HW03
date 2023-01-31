@@ -157,6 +157,31 @@ int unitTest5(int status)
     return passed;
 }
 
+int unitTest6(int status)
+{
+    int passed = 0;
+    queue_t *q = (queue_t *)malloc(sizeof(queue_t));
+    q->back = 2;
+    q->front = 3;
+    q->size = 3;
+    q->capacity = 4;
+    q->data = (int *)calloc(q->capacity, sizeof(int));
+
+    q->data[3] = 34;
+    q->data[0] = 4;
+    q->data[1] = 14;
+
+    int a = queue_dequeue(q);
+    int b = queue_dequeue(q);
+    int c = queue_dequeue(q);
+    if(c == 14){
+        passed = 1;
+    }
+
+    return passed;
+    
+}
+
 // TODO: Add more tests here
 // add your own, and uncomment the provided tests as 
 // things are implemented
@@ -166,6 +191,7 @@ int (*unitTests[])(int) = {
     unitTest3,
     unitTest4,
     unitTest5,
+    unitTest6,
     NULL};
 // ====================================================
 // ================== Program Entry ===================

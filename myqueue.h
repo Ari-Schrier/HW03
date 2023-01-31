@@ -49,7 +49,7 @@ queue_t *create_queue(unsigned int capacity)
 }
 
 unsigned int advance_pointer(queue_t *q, unsigned int arrow){
-    if(arrow == q->capacity){
+    if(arrow == q->capacity - 1){
         arrow = 0;
     }else{
         arrow ++;
