@@ -152,6 +152,38 @@ int unitTest5(int status)
     return passed;
 }
 
+int testEmptyDequeue(int status){
+    stack_t *test_s = create_stack(10);
+    stack_dequeue(test_s);
+    int passed = 1;
+    return passed;
+}
+
+int testOverfullStack(int status){
+    stack_t *test_s = create_stack(3);
+    int passed = 0;
+    stack_enqueue(test_s, 1);
+    stack_enqueue(test_s, 2);
+    stack_enqueue(test_s, 3);
+    if(stack_enqueue(test_s, 4) == -1){
+        passed = 1;
+    }
+    return passed;
+}
+
+int testDequeueValue(int status){
+    stack_t *test_s = create_stack(3);
+    int passed = 0;
+    stack_enqueue(test_s, 1);
+    stack_enqueue(test_s, 2);
+    stack_enqueue(test_s, 3);
+    if(stack_dequeue(test_s) == 3){
+        passed = 1;
+    }
+    return passed;
+
+}
+
 // TODO: Add more tests here
 // add your own, and uncomment the provided tests as
 // things are implemented
@@ -161,6 +193,9 @@ int (*unitTests[])(int) = {
     unitTest3,
     unitTest4,
     unitTest5,
+    testEmptyDequeue,
+    testOverfullStack,
+    testDequeueValue,
     NULL};
 
 // ====================================================

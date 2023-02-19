@@ -181,6 +181,40 @@ int unitTest6(int status)
     return passed;
     
 }
+//How do I make this expect to not be able to dequeue?
+int testEmptyDequeue(int status){
+    int passed = 0;
+    queue_t *testq = create_queue(1);
+    queue_dequeue(testq);
+    passed = 1;
+    return passed;
+}
+
+int testOverfullQueue(int status){
+    int passed = 0;
+    queue_t *testq = create_queue(3);
+    queue_enqueue(testq, 1);
+    queue_enqueue(testq, 2);
+    queue_enqueue(testq, 3);
+    int bad_enqueue = queue_enqueue(testq, 4);
+    if (bad_enqueue == -1){
+        passed = 1;
+    }
+    return passed;
+}
+
+int testDequeueValue(int status){
+    int passed = 1;
+    queue_t *testq = create_queue(3);
+    queue_enqueue(testq, 1);
+    queue_enqueue(testq, 2);
+    queue_enqueue(testq, 3);
+    int dequeued = queue_dequeue(testq);
+    if (dequeued == 1){
+        passed = 1;
+    }
+    return passed;
+}
 
 // TODO: Add more tests here
 // add your own, and uncomment the provided tests as 
@@ -192,6 +226,9 @@ int (*unitTests[])(int) = {
     unitTest4,
     unitTest5,
     unitTest6,
+    testEmptyDequeue,
+    testOverfullQueue,
+    testDequeueValue,
     NULL};
 // ====================================================
 // ================== Program Entry ===================
