@@ -1,7 +1,7 @@
 /*  ========== H03 - Personal Queue Implementation ============
  *
- *   Student: UPDATE
- *   Semester: UPDATE
+ *   Student: Aidan Schrier
+ *   Semester: Spring 2023
  *
  * A simple queue unit-tst implementation 
  *
